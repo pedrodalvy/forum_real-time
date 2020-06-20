@@ -11,3 +11,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .idea
+_ide*
+.phpstorm.meta.php
+/public/css/app.css
+/public/js/app.js
