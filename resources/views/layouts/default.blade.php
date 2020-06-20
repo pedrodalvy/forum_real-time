@@ -17,7 +17,7 @@
 </header>
 
 <main>
-    <section class="container">
+    <section id="app" class="container">
         @yield('content')
     </section>
 </main>

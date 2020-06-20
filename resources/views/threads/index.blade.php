@@ -1,8 +1,9 @@
 @extends('layouts.default')
 @section('content')
-    <div id="app">
-        <example-component>
+    <div>
+        <h3>Tópicos mais recentes</h3>
+        <threads>
             Carregando
-        </example-component>
+        </threads>
     </div>
 @endsection
