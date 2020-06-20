@@ -3,7 +3,7 @@
     <div>
         <h3>Tópicos mais recentes</h3>
         <threads>
-            Carregando
+            @include('layouts.default.preloader')
         </threads>
     </div>
 @endsection
