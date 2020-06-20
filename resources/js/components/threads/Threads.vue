@@ -13,12 +13,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Masts travel on life at la marsa beach!</td>
-                    <td class="center-align">2</td>
+                <tr v-for="thread in threads">
+                    <td>{{thread.id}}</td>
+                    <td>{{thread.title}}</td>
+                    <td class="center-align">{{thread.replies.length}}</td>
                     <td class="center-align">
-                        <a href="#" title="Abrir">
+                        <a :href=thread.links.href title="Mostrar">
                             <i class="material-icons">open_in_browser</i>
                         </a>
                     </td>
@@ -31,7 +31,21 @@
 
 <script>
     export default {
-        name: "Threads"
+        name: "Threads",
+        data() {
+            return {
+                threads: []
+            }
+        },
+        mounted() {
+            window.axios.get('/threads')
+            .then( response => {
+                this.threads = response.data.data;
+                console.log(this.threads)
+            }).catch( e => {
+                console.log(e.error);
+            })
+        }
     }
 </script>
 
