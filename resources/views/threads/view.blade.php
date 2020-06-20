@@ -8,5 +8,9 @@
                 {{ $thread->body }}
             </div>
         </div>
+
+        <replies>
+            @include('layouts.default.preloader')
+        </replies>
     </div>
 @endsection
