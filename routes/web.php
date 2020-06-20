@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('threads.index');
 });
 
+Route::get('/threads/{id}', function ($id) {
+    $thread = \App\Models\Thread::findOrFail($id);
+    return view('threads.view', compact('thread'));
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
