@@ -8,16 +8,20 @@
                 <tr>
                     <th>#</th>
                     <th>Tópico</th>
-                    <th>Respostas</th>
-                    <th></th>
+                    <th class="center-align">Respostas</th>
+                    <th class="center-align">Ações</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <td>1</td>
                     <td>Masts travel on life at la marsa beach!</td>
-                    <td>2</td>
-                    <td></td>
+                    <td class="center-align">2</td>
+                    <td class="center-align">
+                        <a href="#" title="Abrir">
+                            <i class="material-icons">open_in_browser</i>
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

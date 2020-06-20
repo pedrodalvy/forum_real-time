@@ -8,6 +8,7 @@
     <meta name="csrf_token" content="{{ csrf_token() }}">
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <title>{{ env('APP_NAME') }}</title>
 </head>
