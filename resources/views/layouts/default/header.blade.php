@@ -3,9 +3,24 @@
         <div class="container">
             <a href="#" class="brand-logo">{{ env('APP_NAME') }}</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="#">Link 1</a></li>
-                <li><a href="#">Link 2</a></li>
-                <li><a href="#">Link 3</a></li>
+                @guest
+                    <li><a href="{{ route('login') }}">Login</a></li>
+
+                    @if (Route::has('register'))
+                        <li><a href="{{ route('register') }}">Registrar</a></li>
+                    @endif
+                @else
+                    <li>
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            Sair
+                        </a>
+                    </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @endguest
             </ul>
         </div>
     </div>
