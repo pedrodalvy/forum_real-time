@@ -32,7 +32,19 @@ class ThreadsController extends Controller
 
     public function store(Request $request)
     {
-        //
+        try {
+            $thread = $this->threadRepository->store($request->all());
+            return response()->json([
+                'created' => 'success',
+                'data' => $thread,
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'created' => 'failed',
+                'message' => $e->getMessage(),
+            ], 400);
+        }
     }
 
 

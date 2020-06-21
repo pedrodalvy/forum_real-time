@@ -24,4 +24,10 @@ class ThreadsRepository
     {
         return $this->threads::findOrFail($id);
     }
+
+    public function store(array $thread)
+    {
+        $thread['user_id'] = \Auth::user()->id;
+        return $this->threads::create($thread);
+    }
 }
