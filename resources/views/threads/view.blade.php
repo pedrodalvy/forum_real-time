@@ -10,6 +10,7 @@
 
             <div class="card-action">
                 <a href="{{ route('threads.edit', $thread->id) }}">Editar</a>
+                <a href="{{ route('index') }}">Voltar</a>
             </div>
         </div>
 

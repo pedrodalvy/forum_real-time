@@ -10,8 +10,10 @@ try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
 
+    window.Toastr = require('toastr');
+    require('toastr/build/toastr.min.css');
+
     require('materialize-css');
-    // require('materialize-css/dist/js/materialize.js');
 } catch (e) {}
 
 /**

@@ -45,6 +45,8 @@
 </template>
 
 <script>
+    import {forEach} from "lodash";
+
     export default {
         name: "Threads",
         data() {
@@ -71,8 +73,11 @@
                     .then(resp => {
                         this.getThreads();
                         this.newThread = {};
+                        Toastr["success"]('Tópico inserido com sucesso.');
                     }).catch(e => {
-                        //
+                        forEach(e.response.data.errors, (item) => {
+                            Toastr["error"](item);
+                        });
                 });
             }
         }
