@@ -1,7 +1,7 @@
 <nav>
     <div class="nav-wrapper">
         <div class="container">
-            <a href="#" class="brand-logo">{{ env('APP_NAME') }}</a>
+            <a href="{{ route('index') }}" class="brand-logo">{{ env('APP_NAME') }}</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 @guest
                     <li><a href="{{ route('login') }}">Login</a></li>
