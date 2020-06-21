@@ -13,7 +13,7 @@ class ThreadsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,30 @@ class ThreadsRequest extends FormRequest
      */
     public function rules()
     {
+        switch ($this->method()) {
+            case 'POST':
+            {
+                return [
+                    'title' => 'required|string|min:10|max:255',
+                    'body' => 'required|string|min:20',
+                ];
+            }
+            default:
+            {
+                return [
+                    'title' => 'string|min:10|max:255',
+                    'body' => 'string|min:20',
+                ];
+            }
+        }
+
+    }
+
+    public function attributes()
+    {
         return [
-            //
+            'title' => 'título',
+            'body' => 'conteúdo',
         ];
     }
 }
