@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Thread;
 use App\Repositories\ThreadsRepository;
-use Illuminate\Http\Request;
+use App\Http\Requests\ThreadsRequest as Request;
 
 class ThreadsController extends Controller
 {
@@ -61,10 +61,32 @@ class ThreadsController extends Controller
         }
     }
 
-
-    public function update(Request $request, Thread $thread)
+    public function edit($id)
     {
-        //
+        try {
+            $thread = $this->threadRepository->find($id);
+            return view('threads.edit', compact('thread'));
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 400);
+        }
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $thread = $this->threadRepository->update($request->all(), $id);
+            return redirect()->route('threads.show', $thread->id);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'updated' => 'failed',
+                'message' => $e->getMessage()
+            ], 400);
+        }
     }
 
 

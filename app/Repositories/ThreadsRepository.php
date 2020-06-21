@@ -30,4 +30,11 @@ class ThreadsRepository
         $thread['user_id'] = \Auth::user()->id;
         return $this->threads::create($thread);
     }
+
+    public function update(array $threadData, int $id)
+    {
+        $thread = self::find($id);
+        $thread->fill($threadData)->update();
+        return $thread;
+    }
 }
