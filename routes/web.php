@@ -8,10 +8,11 @@ Route::get('/', function () {
 
 Route::get('/threads/{id}', 'ThreadsController@show')->name('threads.show');
 
-
 Route::middleware(['auth'])->group(function () {
-    Route::get('threads', 'ThreadsController@index');
-    Route::post('threads', 'ThreadsController@store');
+    Route::get('threads', 'ThreadsController@index')->name('threads.index');
+    Route::post('threads', 'ThreadsController@store')->name('threads.store');
+    Route::put('threads/{id}', 'ThreadsController@update')->name('threads.update');
+    Route::get('threads/{id}/edit', 'ThreadsController@edit')->name('threads.edit');
 });
 
 Auth::routes();
