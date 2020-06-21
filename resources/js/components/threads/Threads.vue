@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="card-content">
-            <div class="card-title">Tópicos</div>
+            <span class="card-title">Tópicos</span>
 
             <table>
                 <thead>
@@ -26,6 +26,21 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="card-content">
+            <div class="card-title">Novo Tópico</div>
+
+            <form @submit.prevent="save()">
+                <div class="input-field">
+                    <input type="text" placeholder="Título" v-model="newThread.title">
+                </div>
+                <div class="input-field">
+                    <textarea class="materialize-textarea" placeholder="Conteúdo"
+                              v-model="newThread.body"></textarea>
+                </div>
+                <button type="submit" class="btn red accent-2">Enviar</button>
+            </form>
+        </div>
     </div>
 </template>
 
@@ -34,17 +49,32 @@
         name: "Threads",
         data() {
             return {
-                threads: []
+                threads: [],
+                newThread: {},
             }
         },
         mounted() {
-            window.axios.get('/threads')
-            .then( response => {
-                this.threads = response.data.data;
-                console.log(this.threads)
-            }).catch( e => {
-                console.log(e.error);
-            })
+            this.getThreads();
+        },
+        methods: {
+            getThreads() {
+                window.axios.get('/threads')
+                    .then(response => {
+                        this.threads = response.data.data;
+
+                    }).catch(e => {
+                    console.log(e.error);
+                })
+            },
+            save() {
+                window.axios.post('/threads', this.newThread)
+                    .then(resp => {
+                        this.getThreads();
+                        this.newThread = {};
+                    }).catch(e => {
+                        //
+                });
+            }
         }
     }
 </script>
