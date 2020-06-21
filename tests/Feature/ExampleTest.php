@@ -33,7 +33,7 @@ class ExampleTest extends TestCase
         $response->assertStatus(200);
 
         $response = $this->get('/threads/a');
-        $response->assertStatus(404);
+        $response->assertStatus(400);
     }
 
     public function testThreadVisualization()
