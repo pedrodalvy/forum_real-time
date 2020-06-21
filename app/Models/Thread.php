@@ -9,7 +9,11 @@ class Thread extends Model
     protected $appends = ['links'];
 
     protected $fillable = [
-        'body', 'thread_id', 'user_id'
+        'title', 'body', 'user_id'
+    ];
+
+    protected $casts = [
+        'user_id' => 'string'
     ];
 
     public function getLinksAttribute()
