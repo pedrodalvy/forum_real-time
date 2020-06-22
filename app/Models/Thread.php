@@ -6,7 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
+    protected $appends = ['links'];
+
     protected $fillable = [
-        'body', 'thread_id', 'user_id'
+        'title', 'body', 'user_id'
     ];
+
+    protected $casts = [
+        'user_id' => 'string'
+    ];
+
+    public function getLinksAttribute()
+    {
+        return [
+            'href' => route('threads.show', $this->id),
+            'rel' => 'Exibir Tópico'
+        ];
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
 }

@@ -3,81 +3,94 @@
 namespace App\Http\Controllers;
 
 use App\Models\Thread;
-use Illuminate\Http\Request;
+use App\Repositories\ThreadsRepository;
+use App\Http\Requests\ThreadsRequest as Request;
 
 class ThreadsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $threadRepository;
+    protected $threads;
+
+    public function __construct(ThreadsRepository $threadRepository)
+    {
+        $this->threadRepository = $threadRepository;
+    }
+
+
     public function index()
     {
-        //
+        try {
+            $threads = $this->threadRepository->all();
+            return response()->json($threads);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 400);
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        try {
+            $thread = $this->threadRepository->store($request->all());
+            return response()->json([
+                'created' => 'success',
+                'data' => $thread,
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'created' => 'failed',
+                'message' => $e->getMessage(),
+            ], 400);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Thread  $thread
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Thread $thread)
+
+    public function show($id)
     {
-        //
+        try {
+            $thread = $this->threadRepository->find($id);
+            return view('threads.view', compact('thread'));
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 400);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Thread  $thread
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Thread $thread)
+    public function edit($id)
     {
-        //
+        try {
+            $thread = $this->threadRepository->find($id);
+            return view('threads.edit', compact('thread'));
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 400);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Thread  $thread
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Thread $thread)
+
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $thread = $this->threadRepository->update($request->all(), $id);
+            return redirect()->route('threads.show', $thread->id);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'updated' => 'failed',
+                'message' => $e->getMessage()
+            ], 400);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Thread  $thread
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Thread $thread)
     {
         //

@@ -2,8 +2,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Toastr.options = {
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "showDuration": "500",
+}
 
 Vue.component('threads', require('./components/threads/Threads').default);
 Vue.component('replies', require('./components/replies/Replie').default);
