@@ -9,14 +9,14 @@
             </div>
 
             <div class="card-action">
-                @if (\Auth::user()->can('update', $thread))
+                @if (\Auth::user() and \Auth::user()->can('update', $thread))
                     <a href="{{ route('threads.edit', $thread->id) }}">Editar</a>
                 @endif
                 <a href="{{ route('index') }}">Voltar</a>
             </div>
         </div>
 
-        <replies>
+        <replies thread-id="{{ $thread->id }}">
             @include('layouts.default.preloader')
         </replies>
     </div>
