@@ -51,7 +51,7 @@
                 })
             },
             save() {
-                window.axios.post('/replies/'+this.threadId, this.newReplie)
+                window.axios.post('/replies', this.newReplie)
                     .then(() => {
                         this.getReplies();
                         this.newReplie = {};
