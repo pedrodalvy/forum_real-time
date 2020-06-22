@@ -17,12 +17,9 @@ class ThreadsRepository
 
     public function all()
     {
-        return $this->threads::orderBy('updated_at', 'desc')->with('replies')->paginate();
-    }
-
-    public function find($id)
-    {
-        return $this->threads::findOrFail($id);
+        return $this->threads::orderBy('updated_at', 'desc')
+            ->with('replies')
+            ->paginate();
     }
 
     public function store(array $thread)
@@ -34,7 +31,17 @@ class ThreadsRepository
     public function update(array $threadData, int $id)
     {
         $thread = self::find($id);
-        $thread->fill($threadData)->update();
-        return $thread;
+
+        if (\Auth::user()->can('update', $thread)) {
+            $thread->fill($threadData)->update();
+            return $thread;
+        }
+        
+        abort(403, 'Usuário não autorizado.');
+    }
+
+    public function find($id)
+    {
+        return $this->threads::findOrFail($id);
     }
 }

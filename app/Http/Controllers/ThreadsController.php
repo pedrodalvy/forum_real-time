@@ -9,6 +9,7 @@ use App\Http\Requests\ThreadsRequest as Request;
 class ThreadsController extends Controller
 {
     protected $threadRepository;
+    protected $threads;
 
     public function __construct(ThreadsRepository $threadRepository)
     {

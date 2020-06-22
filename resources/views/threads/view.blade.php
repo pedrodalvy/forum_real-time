@@ -9,7 +9,9 @@
             </div>
 
             <div class="card-action">
-                <a href="{{ route('threads.edit', $thread->id) }}">Editar</a>
+                @if (\Auth::user()->can('update', $thread))
+                    <a href="{{ route('threads.edit', $thread->id) }}">Editar</a>
+                @endif
                 <a href="{{ route('index') }}">Voltar</a>
             </div>
         </div>
