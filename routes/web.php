@@ -19,6 +19,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::name('replies.')->prefix('replies')->group(function () {
         Route::get('/{id}', 'RepliesController@show')->name('show');
+        Route::post('/', 'RepliesController@store')->name('store');
     });
 });
 
