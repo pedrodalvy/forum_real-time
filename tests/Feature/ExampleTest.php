@@ -25,14 +25,15 @@ class ExampleTest extends TestCase
     public function testReplies()
     {
         $this->runSeeds();
+        $user = \App\Models\User::find(1);
 
-        $response = $this->get('/threads/1');
+        $response = $this->actingAs($user)->get('/threads/1');
         $response->assertStatus(200);
 
-        $response = $this->get('/threads/2');
+        $response = $this->actingAs($user)->get('/threads/2');
         $response->assertStatus(200);
 
-        $response = $this->get('/threads/a');
+        $response = $this->actingAs($user)->get('/threads/a');
         $response->assertStatus(400);
     }
 

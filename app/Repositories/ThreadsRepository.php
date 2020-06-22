@@ -36,7 +36,7 @@ class ThreadsRepository
             $thread->fill($threadData)->update();
             return $thread;
         }
-        
+
         abort(403, 'Usuário não autorizado.');
     }
 
