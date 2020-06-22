@@ -74,6 +74,7 @@
                         this.getThreads();
                         this.newThread = {};
                         Toastr["success"]('Tópico inserido com sucesso.');
+
                     }).catch(e => {
                         forEach(e.response.data.errors, (item) => {
                             Toastr["error"](item);

@@ -9,7 +9,7 @@ Toastr.options = {
 }
 
 Vue.component('threads', require('./components/threads/Threads').default);
-Vue.component('replies', require('./components/replies/Replie').default);
+Vue.component('replies', require('./components/replies/Replies').default);
 
 const app = new Vue({
     el: '#app',
