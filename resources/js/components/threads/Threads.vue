@@ -57,6 +57,12 @@
         },
         mounted() {
             this.getThreads();
+
+            Echo.channel('new.thread')
+                .listen('NewThread', event => {
+                    console.log(event)
+            });
+
         },
         methods: {
             getThreads() {

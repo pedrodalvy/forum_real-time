@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 
+use App\Events\NewThread;
 use App\Models\Thread;
 
 class ThreadsRepository
@@ -25,7 +26,11 @@ class ThreadsRepository
     public function store(array $thread)
     {
         $thread['user_id'] = \Auth::user()->id;
-        return $this->threads::create($thread);
+        $newThread = $this->threads::create($thread);
+
+        event(new NewThread($newThread));
+
+        return $newThread;
     }
 
     public function update(array $threadData, int $id)

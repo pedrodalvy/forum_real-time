@@ -38,7 +38,10 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: process.env.MIX_PUSHER_APP_KEY,
-    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    key: 'df079573e8f80f19a440',
+    // key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: 'us2',
+    // cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     forceTLS: true
 });
+
