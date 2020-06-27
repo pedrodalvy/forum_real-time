@@ -15,7 +15,8 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "lucascudo/laravel-pt-br-localization": "^1.1"
+        "lucascudo/laravel-pt-br-localization": "^1.1",
+        "pusher/pusher-php-server": "^4.1"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.7",
