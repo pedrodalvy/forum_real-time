@@ -7,18 +7,19 @@ Route::get('/', function () {
 })->name('index');
 
 Route::get('/threads/{id}', 'ThreadsController@show')->name('threads.show');
+Route::get('/threads/', 'ThreadsController@index')->name('threads.index');
+Route::get('/replies/{id}', 'RepliesController@show')->name('replies.show');
+
 
 Route::middleware(['auth'])->group(function () {
 
     Route::name('threads.')->prefix('threads')->group(function () {
-        Route::get('/', 'ThreadsController@index')->name('index');
         Route::post('/', 'ThreadsController@store')->name('store');
         Route::put('/{id}', 'ThreadsController@update')->name('update');
         Route::get('/{id}/edit', 'ThreadsController@edit')->name('edit');
     });
 
     Route::name('replies.')->prefix('replies')->group(function () {
-        Route::get('/{id}', 'RepliesController@show')->name('show');
         Route::post('/', 'RepliesController@store')->name('store');
     });
 });
