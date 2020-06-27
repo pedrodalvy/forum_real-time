@@ -40,6 +40,12 @@
         },
         mounted() {
             this.getReplies();
+
+            Echo.channel('new.reply.'+this.threadId)
+                .listen('NewReply', event => {
+                    if (event.reply) this.getReplies();
+
+                });
         },
         methods: {
             getReplies() {
@@ -54,7 +60,9 @@
                 window.axios.post('/replies', this.newReplie)
                     .then(() => {
                         this.getReplies();
-                        this.newReplie = {};
+                        this.newReplie = {
+                            thread_id: this.threadId
+                        };
                         Toastr["success"]('Resposta cadastrada com sucesso');
 
                     }).catch(e => {

@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 
+use App\Events\NewReply;
 use App\Models\Reply;
 use Auth;
 
@@ -24,9 +25,13 @@ class RepliesRepository
             ->get();
     }
 
-    public function store(array $replie)
+    public function store(array $reply)
     {
-        $replie['user_id'] = Auth::user()->id;
-        return $this->replies::create($replie);
+        $reply['user_id'] = Auth::user()->id;
+        $newReply = $this->replies::create($reply);
+
+        event(new NewReply($newReply));
+
+        return $newReply;
     }
 }
