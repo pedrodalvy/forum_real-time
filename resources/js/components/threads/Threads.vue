@@ -60,7 +60,10 @@
 
             Echo.channel('new.thread')
                 .listen('NewThread', event => {
-                    console.log(event)
+                    if (event.thread) {
+                        console.log(event.thread)
+                        this.getThreads();
+                    }
             });
 
         },
